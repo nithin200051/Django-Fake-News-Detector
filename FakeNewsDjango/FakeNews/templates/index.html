@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News📰 Detection</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Include your CSS stylesheets or link to them here -->
+</head>
+<body>
+    <header>
+        <h1>Fake News📰 Detection</h1>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Enter the News Article</h2>
+            <form id="news-form" method="post" action="{% url 'detect' %}">
+                {% csrf_token %}
+                <textarea id="news-input" name="news_content" rows="5" placeholder="Enter the news article here..." required></textarea>
+                <button type="submit">Detect Fake News📰</button>
+            </form>
+        </section>
+
+       <div class="results">
+            <h2>Result</h2>
+                    {% if prediction == 'FAKE' %}
+                              <h2 style="color:red; text-align:center;">Looking Spam⚠️News📰 </h2>
+                    {% elif prediction == 'REAL' %}
+                              <h2 style="color:green;text-align:center;"><b>Looking Real News📰</b></h2>
+                    {% endif %}
+       </div>
+    </main>
+
+    <footer>
+        <p>&copy; Fake News Detection</p>
+    </footer>
+
+    <!-- Include your JavaScript files or scripts here -->
+</body>
+</html>
